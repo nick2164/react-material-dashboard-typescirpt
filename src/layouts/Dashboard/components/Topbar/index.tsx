@@ -52,6 +52,12 @@ type Props = {
   onToggleSidebar: Function;
 };
 
+type State = {
+  notifications: any[];
+  notificationsLimit: number;
+  notificationsCount: number;
+  notificationsEl: any;
+};
 const Topbar: React.FC<Props> = ({
   className,
   title,
@@ -62,12 +68,7 @@ const Topbar: React.FC<Props> = ({
   const rootClassName = classNames(classes.root, className);
   const signalRef = useRef(true);
   const { history } = useContext(__RouterContext);
-  const [state, setState] = useState<{
-    notifications: any[];
-    notificationsLimit: number;
-    notificationsCount: number;
-    notificationsEl: any;
-  }>({
+  const [state, setState] = useState<State>({
     notifications: [],
     notificationsLimit: 4,
     notificationsCount: 0,

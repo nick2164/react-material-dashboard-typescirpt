@@ -85,14 +85,14 @@ export default theme => ({
     width: '100%'
   },
   facebookIcon: {
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing(1)
   },
   googleButton: {
     marginTop: theme.spacing(2),
     width: '100%'
   },
   googleIcon: {
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing(1)
   },
   sugestion: {
     color: theme.palette.text.secondary,
@@ -150,12 +150,12 @@ export default theme => ({
   fieldError: {
     color: theme.palette.danger.main,
     marginBottom: theme.spacing(2),
-    marginTop: theme.spacing.unit
+    marginTop: theme.spacing(1)
   },
   submitError: {
     color: theme.palette.danger.main,
     alignText: 'center',
-    marginBottom: theme.spacing.unit,
+    marginBottom: theme.spacing(1),
     marginTop: theme.spacing(2)
   }
 });

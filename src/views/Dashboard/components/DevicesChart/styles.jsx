@@ -14,7 +14,7 @@ export default theme => ({
   },
   device: {
     textAlign: 'center',
-    padding: theme.spacing.unit
+    padding: theme.spacing(1)
   },
   deviceIcon: {
     color: theme.palette.common.neutral

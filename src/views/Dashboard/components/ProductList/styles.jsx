@@ -32,7 +32,7 @@ export default theme => ({
   },
   productTitle: {},
   productTimestamp: {
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing(1),
     color: theme.palette.text.secondary
   }
 });

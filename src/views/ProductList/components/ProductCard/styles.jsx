@@ -35,19 +35,19 @@ export default theme => ({
     textOverflow: 'ellipsis',
     color: theme.palette.text.secondary,
     textAlign: 'center',
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing(1),
     marginBottom: theme.spacing(2)
   },
   stats: {
     display: 'flex',
     alignItems: 'center',
-    paddingTop: theme.spacing.unit
+    paddingTop: theme.spacing(1)
   },
   updateIcon: {
     color: theme.palette.text.secondary
   },
   updateText: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
     color: theme.palette.text.secondary
   },
   downloadsIcon: {
@@ -55,7 +55,7 @@ export default theme => ({
     color: theme.palette.text.secondary
   },
   downloadsText: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
     color: theme.palette.text.secondary
   }
 });
