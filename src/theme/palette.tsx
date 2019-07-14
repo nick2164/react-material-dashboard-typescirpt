@@ -1,9 +1,6 @@
 import { white, black } from '../common/colors';
-import {
-  Palette,
-  PaletteOptions
-} from '@material-ui/core/styles/createPalette';
-export default {
+import createPalette from '@material-ui/core/styles/createPalette';
+export default createPalette({
   common: {
     black,
     white,
@@ -58,4 +55,4 @@ export default {
   },
   border: '#DFE3E8',
   divider: '#DFE3E8'
-} as Palette;
+});

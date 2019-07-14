@@ -1,5 +1,7 @@
 // Palette
 import palette from '../palette';
+import { StyleRules } from '@material-ui/core/styles';
+import { ButtonClassKey } from '@material-ui/core/Button';
 
 export default {
   outlined: {},
@@ -9,4 +11,4 @@ export default {
       backgroundColor: palette.common.neutral
     }
   }
-};
+} as Partial<StyleRules<ButtonClassKey>>;

@@ -1,5 +1,7 @@
 // Palette
 import palette from '../palette';
+import { StyleRules } from '@material-ui/core/styles';
+import { TableRowClassKey } from '@material-ui/core/TableRow';
 
 export default {
   root: {
@@ -13,4 +15,4 @@ export default {
       }
     }
   }
-};
+} as Partial<StyleRules<TableRowClassKey>>;

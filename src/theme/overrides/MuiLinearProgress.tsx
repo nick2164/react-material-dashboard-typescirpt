@@ -1,5 +1,7 @@
 // Palette
 import palette from '../palette';
+import { StyleRules } from '@material-ui/core/styles';
+import { LinearProgressClassKey } from '@material-ui/core/LinearProgress';
 
 export default {
   root: {
@@ -9,4 +11,4 @@ export default {
   colorPrimary: {
     backgroundColor: palette.common.neutral
   }
-};
+} as Partial<StyleRules<LinearProgressClassKey>>;

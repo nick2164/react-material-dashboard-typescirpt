@@ -1,3 +1,27 @@
+import { Order } from 'data/orders';
+
+export type User = {
+  id: string;
+  name: string;
+  address: {
+    country: string;
+    state: string;
+    city: string;
+    street: string;
+    zipCode: string;
+  };
+  email: string;
+  phone: string;
+  avatarUrl: string;
+  createdAt: 1555016400000;
+  acceptedCookies: boolean;
+  orders?: Order[];
+  orderIds: string[];
+  interests: string[];
+  returning: boolean;
+  moneySpent?: number;
+};
+
 export default [
   {
     id: 'DEV705225',
@@ -14,7 +38,7 @@ export default [
     avatarUrl: '/images/avatars/avatar_3.png',
     createdAt: 1555016400000,
     acceptedCookies: false,
-    orders: ['DEV730658'],
+    orderIds: ['DEV730658'],
     interests: ['ReactJS'],
     returning: false
   },
@@ -33,7 +57,7 @@ export default [
     phone: '712-351-5711',
     createdAt: 1555016400000,
     acceptedCookies: false,
-    orders: ['DEV898812'],
+    orderIds: ['DEV898812'],
     interests: ['ReactJS', 'Angular'],
     returning: false
   },
@@ -52,7 +76,7 @@ export default [
     avatarUrl: '/images/avatars/avatar_2.png',
     createdAt: 1555016400000,
     acceptedCookies: true,
-    orders: [],
+    orderIds: [],
     interests: ['VueJS'],
     returning: false
   },
@@ -71,7 +95,7 @@ export default [
     phone: '908-691-3242',
     createdAt: 1554930000000,
     acceptedCookies: true,
-    orders: ['DEV793788'],
+    orderIds: ['DEV793788'],
     interests: ['HTML'],
     returning: true
   },
@@ -91,7 +115,7 @@ export default [
 
     createdAt: 1554757200000,
     acceptedCookies: true,
-    orders: ['DEV841788'],
+    orderIds: ['DEV841788'],
     interests: ['ReactJS', 'EmberJS'],
     returning: true
   },
@@ -111,7 +135,7 @@ export default [
     bio: 'Developer',
     createdAt: 1554670800000,
     acceptedCookies: true,
-    orders: ['DEV552540'],
+    orderIds: ['DEV552540'],
     interests: ['ReactJS', 'VueJS'],
     returning: false
   },
@@ -130,7 +154,7 @@ export default [
     phone: '415-907-2647',
     createdAt: 1554325200000,
     acceptedCookies: true,
-    orders: ['DEV593146', 'DEV783653'],
+    orderIds: ['DEV593146', 'DEV783653'],
     interests: ['NextJS'],
     returning: false
   },
@@ -149,7 +173,7 @@ export default [
     avatarUrl: '/images/avatars/avatar_8.png',
     createdAt: 1523048400000,
     acceptedCookies: true,
-    orders: [],
+    orderIds: [],
     interests: ['GatsbyJS'],
     returning: false
   },
@@ -168,7 +192,7 @@ export default [
     phone: '313-812-8947',
     createdAt: 1522875600000,
     acceptedCookies: true,
-    orders: [],
+    orderIds: [],
     interests: ['Apollo GraphQL'],
     returning: true
   },
@@ -187,8 +211,8 @@ export default [
     avatarUrl: '/images/avatars/avatar_10.png',
     createdAt: 1522702800000,
     acceptedCookies: false,
-    orders: [],
+    orderIds: [],
     interests: ['Angular'],
     returning: true
   }
-];
+] as User[];

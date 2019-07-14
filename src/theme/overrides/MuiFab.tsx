@@ -1,5 +1,7 @@
 // Palette
 import palette from '../palette';
+import { StyleRules } from '@material-ui/core/styles';
+import { FabClassKey } from '@material-ui/core/Fab';
 
 export default {
   root: {
@@ -9,4 +11,4 @@ export default {
       backgroundColor: palette.common.neutral
     }
   }
-};
+} as Partial<StyleRules<FabClassKey>>;

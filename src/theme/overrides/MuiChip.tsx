@@ -1,5 +1,7 @@
 // Palette
 import palette from '../palette';
+import { StyleRules } from '@material-ui/core/styles';
+import { ChipClassKey } from '@material-ui/core/Chip';
 
 export default {
   root: {
@@ -21,4 +23,4 @@ export default {
       backgroundColor: palette.primary.light
     }
   }
-};
+} as Partial<StyleRules<ChipClassKey>>;

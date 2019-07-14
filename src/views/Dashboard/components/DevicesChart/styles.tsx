@@ -1,4 +1,6 @@
-export default theme => ({
+import { makeStyles } from '@material-ui/core';
+
+export default makeStyles(theme => ({
   root: {},
   refreshButton: {
     margin: -theme.spacing(2)
@@ -19,4 +21,4 @@ export default theme => ({
   deviceIcon: {
     color: theme.palette.common.neutral
   }
-});
+}));

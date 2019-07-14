@@ -42,6 +42,7 @@ import { NotificationList } from './components';
 // Component styles
 import styles from './styles';
 import { __RouterContext } from 'react-router';
+import { Notif } from 'data/notifications';
 
 const useStyles = makeStyles(styles);
 
@@ -53,7 +54,7 @@ type Props = {
 };
 
 type State = {
-  notifications: any[];
+  notifications: Notif[];
   notificationsLimit: number;
   notificationsCount: number;
   notificationsEl: any;

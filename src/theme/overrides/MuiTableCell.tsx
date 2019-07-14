@@ -1,5 +1,7 @@
 // Palette
 import palette from '../palette';
+import { StyleRules } from '@material-ui/core/styles';
+import { TableCellClassKey } from '@material-ui/core/TableCell';
 
 export default {
   root: {
@@ -10,4 +12,4 @@ export default {
     fontSize: '14px',
     color: palette.text.primary
   }
-};
+} as Partial<StyleRules<TableCellClassKey>>;

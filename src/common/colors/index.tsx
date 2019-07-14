@@ -1,3 +1,6 @@
+import { PaletteColorOptions } from '@material-ui/core/styles/createPalette';
+import { Color } from '@material-ui/core';
+
 export const white = '#FFFFFF';
 
 export const grey = {

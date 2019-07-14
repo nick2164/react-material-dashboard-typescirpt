@@ -1,3 +1,10 @@
+export type Notif = {
+  id: string;
+  title: string;
+  when: string;
+  type: string;
+  to: string;
+};
 export default [
   {
     id: 'DEV716627',
@@ -27,4 +34,4 @@ export default [
     type: 'feature',
     to: '/features'
   }
-];
+] as Notif[];

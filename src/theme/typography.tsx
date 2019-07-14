@@ -1,7 +1,7 @@
 import palette from './palette';
-import { TypographyOptions } from '@material-ui/core/styles/createTypography';
+import createTypography from '@material-ui/core/styles/createTypography';
 
-export default {
+export default createTypography(palette, {
   h1: {
     color: palette.text.primary,
     fontWeight: 500,
@@ -78,4 +78,4 @@ export default {
     letterSpacing: '0.3px',
     lineHeight: '16px'
   }
-} as TypographyOptions;
+});

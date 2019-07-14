@@ -1,5 +1,7 @@
 // Palette
 import palette from '../palette';
+import { StyleRules } from '@material-ui/core/styles';
+import { TabClassKey } from '@material-ui/core/Tab';
 
 export default {
   root: {
@@ -19,4 +21,4 @@ export default {
   textColorPrimary: {
     color: palette.text.secondary
   }
-};
+} as Partial<StyleRules<TabClassKey>>;

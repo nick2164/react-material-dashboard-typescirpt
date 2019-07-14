@@ -1,6 +1,6 @@
-import { createStyles, Theme } from '@material-ui/core';
+import { Theme, makeStyles } from '@material-ui/core';
 
-export default createStyles((theme: Theme) => ({
+export default makeStyles((theme: Theme) => ({
   topbar: {
     position: 'fixed',
     width: '100%',

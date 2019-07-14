@@ -1,3 +1,14 @@
+export type Product = {
+  id: string;
+  title: string;
+  description: string
+  imageUrl:string;
+  totalDownloads: string;
+  price: string;
+  status: string;
+  createdAt: string
+}
+
 export default [
   {
     id: 'DEV738089',
@@ -65,4 +76,4 @@ export default [
     status: 'published',
     createdAt: '04/04/2019'
   }
-];
+] as Product[];

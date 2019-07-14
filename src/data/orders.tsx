@@ -1,8 +1,19 @@
+import { User } from 'data/users';
+
+export type Order = {
+  id: string;
+  amount: number;
+  customer?: User;
+  customerId: string;
+  products: string[];
+  createdAt: number;
+  status: 'pending' | 'delivered' | 'refund';
+};
 export default [
   {
     id: 'DEV730658',
     amount: 30.5,
-    customer: 'DEV705225',
+    customerId: 'DEV705225',
     products: ['DEV738089'],
     createdAt: 1555016400000,
     status: 'pending'
@@ -10,7 +21,7 @@ export default [
   {
     id: 'DEV898812',
     amount: 25.1,
-    customer: 'DEV696649',
+    customerId: 'DEV696649',
     products: ['DEV774585'],
     createdAt: 1555016400000,
     status: 'delivered'
@@ -18,7 +29,7 @@ export default [
   {
     id: 'DEV793788',
     amount: 10.99,
-    customer: 'DEV702967',
+    customerId: 'DEV702967',
     products: ['DEV654476'],
     createdAt: 1554930000000,
     status: 'refund'
@@ -26,7 +37,7 @@ export default [
   {
     id: 'DEV841788',
     amount: 96.43,
-    customer: 'DEV663348',
+    customerId: 'DEV663348',
     products: ['DEV654476', 'DEV773559'],
     createdAt: 1554757200000,
     status: 'pending'
@@ -34,7 +45,7 @@ export default [
   {
     id: 'DEV552540',
     amount: 32.54,
-    customer: 'DEV728981',
+    customerId: 'DEV728981',
     products: ['DEV738089'],
     createdAt: 1554670800000,
     status: 'delivered'
@@ -42,7 +53,7 @@ export default [
   {
     id: 'DEV783653',
     amount: 34.2,
-    customer: 'DEV883167',
+    customerId: 'DEV883167',
     products: ['DEV773559'],
     createdAt: 1554325200000,
     status: 'delivered'
@@ -50,9 +61,9 @@ export default [
   {
     id: 'DEV593146',
     amount: 43.75,
-    customer: 'DEV883167',
+    customerId: 'DEV883167',
     products: ['DEV795381'],
     createdAt: 1554325200000,
     status: 'refund'
   }
-];
+] as Order[];

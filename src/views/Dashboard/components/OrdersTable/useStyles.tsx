@@ -1,4 +1,6 @@
-export default theme => ({
+import { makeStyles } from '@material-ui/core';
+
+export default makeStyles(theme => ({
   root: {},
   portletContent: {
     minWidth: '600px'
@@ -28,4 +30,4 @@ export default theme => ({
   status: {
     marginRight: theme.spacing(1)
   }
-});
+}));

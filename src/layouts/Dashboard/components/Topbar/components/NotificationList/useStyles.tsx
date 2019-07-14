@@ -1,4 +1,6 @@
-export default theme => ({
+import { makeStyles } from '@material-ui/core';
+
+export default makeStyles(theme => ({
   root: {
     width: '350px',
     maxWidth: '100%'
@@ -57,4 +59,4 @@ export default theme => ({
     maxWidth: '100%',
     height: 'auto'
   }
-});
+}));
