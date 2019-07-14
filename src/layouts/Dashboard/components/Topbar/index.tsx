@@ -40,11 +40,9 @@ import { getNotifications } from 'services/notification';
 import { NotificationList } from './components';
 
 // Component styles
-import styles from './styles';
+import useStyles from './useStyles';
 import { __RouterContext } from 'react-router';
 import { Notif } from 'data/notifications';
-
-const useStyles = makeStyles(styles);
 
 type Props = {
   title: string;
