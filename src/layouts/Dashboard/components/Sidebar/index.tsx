@@ -1,13 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-
 // Externals
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
-
 // Material helpers
-import { withStyles } from '@material-ui/core';
-
 // Material components
 import {
   Avatar,
@@ -19,20 +14,18 @@ import {
   ListSubheader,
   Typography
 } from '@material-ui/core';
-
 // Material icons
 import {
+  AccountBoxOutlined as AccountBoxIcon,
   DashboardOutlined as DashboardIcon,
-  PeopleOutlined as PeopleIcon,
-  ShoppingBasketOutlined as ShoppingBasketIcon,
-  LockOpenOutlined as LockOpenIcon,
-  TextFields as TextFieldsIcon,
   ImageOutlined as ImageIcon,
   InfoOutlined as InfoIcon,
-  AccountBoxOutlined as AccountBoxIcon,
-  SettingsOutlined as SettingsIcon
+  LockOpenOutlined as LockOpenIcon,
+  PeopleOutlined as PeopleIcon,
+  SettingsOutlined as SettingsIcon,
+  ShoppingBasketOutlined as ShoppingBasketIcon,
+  TextFields as TextFieldsIcon
 } from '@material-ui/icons';
-
 // Component styles
 import useStyles from './useStyles';
 
@@ -55,7 +48,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           />
         </Link>
       </div>
-      <Divider className={classes.logoDivider} />
+      <Divider className={classes.logoDivider}/>
       <div className={classes.profile}>
         <Link to="/account">
           <Avatar
@@ -71,7 +64,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           Brain Director
         </Typography>
       </div>
-      <Divider className={classes.profileDivider} />
+      <Divider className={classes.profileDivider}/>
       <List component="div" disablePadding>
         <ListItem
           activeClassName={classes.activeListItem}
@@ -79,7 +72,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/dashboard">
           <ListItemIcon className={classes.listItemIcon}>
-            <DashboardIcon />
+            <DashboardIcon/>
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
@@ -92,7 +85,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/users">
           <ListItemIcon className={classes.listItemIcon}>
-            <PeopleIcon />
+            <PeopleIcon/>
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
@@ -105,7 +98,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/products">
           <ListItemIcon className={classes.listItemIcon}>
-            <ShoppingBasketIcon />
+            <ShoppingBasketIcon/>
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
@@ -118,7 +111,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/sign-in">
           <ListItemIcon className={classes.listItemIcon}>
-            <LockOpenIcon />
+            <LockOpenIcon/>
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
@@ -131,7 +124,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/typography">
           <ListItemIcon className={classes.listItemIcon}>
-            <TextFieldsIcon />
+            <TextFieldsIcon/>
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
@@ -144,7 +137,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/icons">
           <ListItemIcon className={classes.listItemIcon}>
-            <ImageIcon />
+            <ImageIcon/>
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
@@ -157,7 +150,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/account">
           <ListItemIcon className={classes.listItemIcon}>
-            <AccountBoxIcon />
+            <AccountBoxIcon/>
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
@@ -170,7 +163,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/settings">
           <ListItemIcon className={classes.listItemIcon}>
-            <SettingsIcon />
+            <SettingsIcon/>
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
@@ -178,7 +171,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           />
         </ListItem>
       </List>
-      <Divider className={classes.listDivider} />
+      <Divider className={classes.listDivider}/>
       <List
         component="div"
         disablePadding
@@ -193,7 +186,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           href="https://devias.io/contact-us"
           target="_blank">
           <ListItemIcon className={classes.listItemIcon}>
-            <InfoIcon />
+            <InfoIcon/>
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}

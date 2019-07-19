@@ -1,32 +1,17 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-
 // Externals
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
 // Material helpers
-import { withStyles } from '@material-ui/core';
-
 // Material components
-import {
-  Button,
-  Divider,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Typography
-} from '@material-ui/core';
-
+import { Button, Divider, List, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
 // Material icons
 import {
   ArrowForwardIos as ArrowForwardIosIcon,
+  Code as CodeIcon,
   Payment as PaymentIcon,
   PeopleOutlined as PeopleIcon,
-  Code as CodeIcon,
-  Store as StoreIcon,
-  SvgIconComponent
+  Store as StoreIcon
 } from '@material-ui/icons';
 
 import { Notif } from 'data/notifications';
@@ -35,19 +20,19 @@ import useStyles from './useStyles';
 
 const icons: { [x: string]: { icon: JSX.Element; color: string } } = {
   order: {
-    icon: <PaymentIcon />,
+    icon: <PaymentIcon/>,
     color: 'blue'
   },
   user: {
-    icon: <PeopleIcon />,
+    icon: <PeopleIcon/>,
     color: 'red'
   },
   product: {
-    icon: <StoreIcon />,
+    icon: <StoreIcon/>,
     color: 'green'
   },
   feature: {
-    icon: <CodeIcon />,
+    icon: <CodeIcon/>,
     color: 'purple'
   }
 };
@@ -58,10 +43,11 @@ type Props = {
   onSelect?: (...args: any[]) => void;
 };
 const NotificationList: React.FC<Props> = ({
-  className,
-  notifications,
-  onSelect = () => {}
-}) => {
+                                             className,
+                                             notifications,
+                                             onSelect = () => {
+                                             }
+                                           }) => {
   const classes = useStyles();
 
   const rootClassName = classNames(classes.root, className);
@@ -94,9 +80,9 @@ const NotificationList: React.FC<Props> = ({
                       primary={notification.title}
                       secondary={notification.when}
                     />
-                    <ArrowForwardIosIcon className={classes.arrowForward} />
+                    <ArrowForwardIosIcon className={classes.arrowForward}/>
                   </ListItem>
-                  <Divider />
+                  <Divider/>
                 </Link>
               ))}
             </List>

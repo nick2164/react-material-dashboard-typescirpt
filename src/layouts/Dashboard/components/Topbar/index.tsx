@@ -1,44 +1,20 @@
-import React, {
-  Component,
-  Fragment,
-  useState,
-  useEffect,
-  useRef,
-  useContext
-} from 'react';
-import { withRouter } from 'react-router-dom';
-
+import React, { Fragment, useContext, useEffect, useRef, useState } from 'react';
 // Externals
 import classNames from 'classnames';
-import compose from 'recompose/compose';
-import PropTypes from 'prop-types';
-
 // Material helpers
-import { withStyles, makeStyles } from '@material-ui/core';
-
 // Material components
-import {
-  Badge,
-  IconButton,
-  Popover,
-  Toolbar,
-  Typography
-} from '@material-ui/core';
-
+import { Badge, IconButton, Popover, Toolbar, Typography } from '@material-ui/core';
 // Material icons
 import {
-  Menu as MenuIcon,
   Close as CloseIcon,
-  NotificationsOutlined as NotificationsIcon,
-  Input as InputIcon
+  Input as InputIcon,
+  Menu as MenuIcon,
+  NotificationsOutlined as NotificationsIcon
 } from '@material-ui/icons';
-
 // Shared services
 import { getNotifications } from 'services/notification';
-
 // Custom components
 import { NotificationList } from './components';
-
 // Component styles
 import useStyles from './useStyles';
 import { __RouterContext } from 'react-router';
@@ -58,11 +34,11 @@ type State = {
   notificationsEl: any;
 };
 const Topbar: React.FC<Props> = ({
-  className,
-  title,
-  isSidebarOpen,
-  onToggleSidebar
-}) => {
+                                   className,
+                                   title,
+                                   isSidebarOpen,
+                                   onToggleSidebar
+                                 }) => {
   const classes = useStyles();
   const rootClassName = classNames(classes.root, className);
   const signalRef = useRef(true);
@@ -132,7 +108,7 @@ const Topbar: React.FC<Props> = ({
             onClick={() => onToggleSidebar()}
             // variant="text"
           >
-            {isSidebarOpen ? <CloseIcon /> : <MenuIcon />}
+            {isSidebarOpen ? <CloseIcon/> : <MenuIcon/>}
           </IconButton>
           <Typography className={classes.title} variant="h4">
             {title}
@@ -144,11 +120,11 @@ const Topbar: React.FC<Props> = ({
               badgeContent={state.notificationsCount}
               color="primary"
               variant="dot">
-              <NotificationsIcon />
+              <NotificationsIcon/>
             </Badge>
           </IconButton>
           <IconButton className={classes.signOutButton} onClick={handleSignOut}>
-            <InputIcon />
+            <InputIcon/>
           </IconButton>
         </Toolbar>
       </div>

@@ -3,8 +3,11 @@ import { createMuiTheme } from '@material-ui/core';
 import palette from './palette';
 import typography from './typography';
 import overrides from './overrides';
+import { PaletteColorOptions } from '@material-ui/core/styles';
+import { PaletteColor } from '@material-ui/core/styles/createPalette';
 
 declare module '@material-ui/core/styles/createPalette' {
+
   interface Palette {
     success: PaletteColor;
     info: PaletteColor;

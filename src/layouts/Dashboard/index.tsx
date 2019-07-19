@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
-
 // Externals
 import classNames from 'classnames';
-
 // Material helpers
-import { makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
-
 // Material components
-import { Drawer } from '@material-ui/core';
-
+import { Drawer, useMediaQuery, useTheme } from '@material-ui/core';
 // Custom components
-import { Sidebar, Topbar, Footer } from './components';
+import { Footer, Sidebar, Topbar } from './components';
 
 import useStyles from './useStyles';
 
@@ -50,14 +45,14 @@ const Dashboard: React.FC<Props> = ({ title, children }) => {
         onClose={handleClose}
         open={isOpen}
         variant={isMobile ? 'temporary' : 'persistent'}>
-        <Sidebar className={classes.sidebar} />
+        <Sidebar className={classes.sidebar}/>
       </Drawer>
       <main
         className={classNames(classes.content, {
           [classes.contentShift]: shiftContent
         })}>
         {children}
-        <Footer />
+        <Footer/>
       </main>
     </>
   );

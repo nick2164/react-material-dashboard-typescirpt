@@ -1,14 +1,9 @@
-import React, { Component, useState, useRef, useEffect } from 'react';
-
+import React, { useEffect, useRef, useState } from 'react';
 // Externals
 import classNames from 'classnames';
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import PropTypes from 'prop-types';
-
 // Material helpers
-import { withStyles } from '@material-ui/core';
-
 // Material components
 import {
   Button,
@@ -18,23 +13,13 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Tooltip,
-  TableSortLabel
+  TableSortLabel,
+  Tooltip
 } from '@material-ui/core';
-
 // Shared services
 import { getOrders } from 'services/order';
-
 // Shared components
-import {
-  Portlet,
-  PortletHeader,
-  PortletLabel,
-  PortletToolbar,
-  PortletContent,
-  Status
-} from 'components';
-
+import { Portlet, PortletContent, PortletHeader, PortletLabel, PortletToolbar, Status } from 'components';
 // Component styles
 import useStyles from './useStyles';
 import { Order } from 'data/orders';
@@ -125,7 +110,7 @@ const OrdersTable: React.FC<Props> = ({ className }) => {
         <PortletContent className={classes.portletContent} noPadding>
           {isLoading && (
             <div className={classes.progressWrapper}>
-              <CircularProgress />
+              <CircularProgress/>
             </div>
           )}
           {showOrders && (
