@@ -1,42 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { getUsers, get1600FakeUsers } from 'hooks/users';
+import { getUsers, get1600FakeUsers, GetUserInterface } from 'hooks/managerAPI/users';
 import User from './User/User';
 import './UserList.css';
 import { AutoSizer, List } from 'react-virtualized';
-import { getUserGroups } from 'hooks/userGroups';
-import { Table } from '@material-ui/core';
-import TableHead from '@material-ui/core/TableHead';
-import TableCell from '@material-ui/core/TableCell';
-import Portlet from '../../../../components/Portlet';
-import PortletHeader from '../../../../components/PortletHeader';
-import Input from '@material-ui/core/Input';
-import TableRow from '@material-ui/core/TableRow';
-import TableBody from '@material-ui/core/TableBody';
+import { Portlet, PortletHeader } from '../../../../components';
+import { Container, Divider, Drawer, Grid, Input, makeStyles, Paper } from '@material-ui/core';
 
-interface UserInterface {
-  presence: {
-    suggestedIconDescription: string,
-    statusName: string,
-  },
-  userID: number,
-  firstName: string,
-  lastName: string,
+interface UserListInterface {
+  height: number
 }
 
-const UserList = () => {
+const UserList = (props: UserListInterface) => {
 
   // const [, fetchedData] = getUsers('papa', []);
-  const [, fetchedData] = get1600FakeUsers('papa', []);
-  const [viewableUsers, setViewableUsers] = useState<[] | UserInterface[]>([]);
-  const [filteredUserList, setFilteredUserList] = useState<[] | UserInterface[]>([]);
+  const [fetchedData] = get1600FakeUsers('papa', []);
+  const [viewableUsers, setViewableUsers] = useState<[] | GetUserInterface[]>([]);
+  const [filteredUserList, setFilteredUserList] = useState<[] | GetUserInterface[]>([]);
   const [searchedWord, setSearchedWord] = useState<string>('');
   const [viewWidth, setViewWidth] = useState<number>(0);
 
-  const [, fetchedUserGroups] = getUserGroups('papa', []); // This is needed for autocompletion
 
-  useEffect(() => {
-    console.log(fetchedUserGroups);
-  }, [fetchedUserGroups]);
+
+  // Component styles
+  const useStyles = makeStyles(theme => ({
+    root: {
+      height: props.height
+    },
+    item: {
+      height: '100%'
+    },
+    test: {}
+  }));
 
   if (localStorage.getItem('userList') === null) {
     localStorage.setItem('userList', JSON.stringify([]));
@@ -75,9 +69,9 @@ const UserList = () => {
 
   }, []); // [fetchedData]
 
-  const getFilteredUsers = (searchWord: string, viewableUsers: [] | UserInterface[]): [] | UserInterface[] => {
+  const getFilteredUsers = (searchWord: string, viewableUsers: [] | GetUserInterface[]): [] | GetUserInterface[] => {
 
-    let list: UserInterface[] = [];
+    let list: GetUserInterface[] = [];
 
     if (viewableUsers.length > 0) {
 
@@ -98,7 +92,7 @@ const UserList = () => {
   };
 
   // Alphabetic sorting on the first name
-  const sortFirstName = (array:UserInterface[]) => {
+  const sortFirstName = (array: GetUserInterface[]) => {
     return array.sort(function(a, b) {
       let x = a.firstName.toLowerCase();
       let y = b.firstName.toLowerCase();
@@ -129,51 +123,47 @@ const UserList = () => {
   const userList = localStorage.getItem('userList');
 
   return (
-    <Portlet>
+    <Portlet classes={useStyles}>
       <PortletHeader>
         <i className="fa fa-address-book fa-lg"/>
         Medarbejdere
         <Input className={'search'} placeholder='Search...'/>
       </PortletHeader>
-      <Table key={'Coworkers'}>
-        <TableHead>
-          <TableRow>
-            <TableCell>test</TableCell>
-            <TableCell>test2</TableCell>
-          </TableRow>
-        </TableHead>
+      <Grid spacing={2} container={true} component={Grid}>
+        <Grid item={true} component={Grid}>
           {(userList !== null) ? (JSON.parse(userList).length < 1 ?
-              (<TableBody>Loading</TableBody>) : // Check if there is found any userList in the local storage and decide if loading screen is showed..
-              (<AutoSizer disableHeight>
+              (<p>Loading</p>) : // Check if there is found any userList in the local storage and decide if loading screen is showed..
+              (<AutoSizer disableHeight={true}>
                 {({ width }) => {
                   return (
                     <List
-                      height={600}
-                      width={width}
-                      rowHeight={90}
+                      height={props.height}
+                      width={width * 0.3}
+                      rowHeight={60}
                       rowCount={filteredUserList.length}
-
                       rowRenderer={
                         ({
                            key,         // Unique key within array of rows
                            index,       // Index of row within collection
                            style        // Style object to be applied to row (to position it)
                          }) =>
-                          <User
-                            key={key}
-                            user={filteredUserList[index]}
-                            style={style}
-                          />
+                          <div style={style} key={key}>
+                            <User
+                              user={filteredUserList[index]}
+                            />
+                          </div>
                       }
                     />
                   );
-
                 }}
               </AutoSizer>)
           ) : (null)
-
           }
-      </Table>
+        </Grid>
+        <Grid item={true} component={Grid}>
+          <h1>Loll</h1>
+        </Grid>
+      </Grid>
     </Portlet>
   );
 };

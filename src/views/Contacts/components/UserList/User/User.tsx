@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './User.css';
-import { TableCell } from '@material-ui/core';
-import TableRow from '@material-ui/core/TableRow';
+import { Avatar, Divider, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
+import ImageIcon from '@material-ui/icons/Image';
 
 interface UserProps {
   user: {
@@ -12,9 +12,7 @@ interface UserProps {
     userID: number,
     firstName: string,
     lastName: string,
-  },
-  style: any,
-  key: any
+  }
 }
 
 const User = (props: UserProps) => {
@@ -42,14 +40,19 @@ const User = (props: UserProps) => {
   }, []);
 
   return (
-    <div style={props.style} key={props.key}>
-      {
-        <TableRow>
-          <TableCell key={props.user.userID}>`${props.user.firstName + ' ' + props.user.lastName}`</TableCell>
-          <TableCell>`${props.user.presence.statusName}`</TableCell>
-        </TableRow>
-      }
-    </div>
+    <React.Fragment>
+      <ListItem color={color}>
+        <ListItemAvatar>
+          <Avatar>
+            <ImageIcon/>
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary={props.user.firstName + ' ' + props.user.lastName} secondary="Jan 9, 2014"/>
+      </ListItem>
+      <Divider variant="inset" component={Divider} />
+    </React.Fragment>
+
+
   );
 
 };

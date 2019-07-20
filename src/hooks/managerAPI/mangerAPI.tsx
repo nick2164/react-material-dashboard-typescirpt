@@ -1,11 +1,11 @@
-import axios from "axios";
-import React, {useState, useEffect} from 'react';
+import axios, { AxiosRequestConfig } from 'axios';
+import React, { useEffect, useState } from 'react';
 
 const baseURL = 'https://api.everconnect.dk/manager/v1';
 
-const defaultConfig = (request) => {
+const defaultConfig = (request: AxiosRequestConfig) => {
 
-  let returnData = {};
+  let returnData: AxiosRequestConfig = {};
   returnData.headers = {};
 
   request.timeout = 5000;
@@ -13,7 +13,7 @@ const defaultConfig = (request) => {
   return request;
 };
 
-export const ManagerAPIPost = (url, data , request) => {
+export const ManagerAPIPost = (url: string, data: object, request: AxiosRequestConfig, dependencies: []) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [fetchedData, setFetchedData] = useState(null);
@@ -25,14 +25,14 @@ export const ManagerAPIPost = (url, data , request) => {
         setFetchedData(response.data);
       }, res => {
         setIsLoading(false);
-      })
-  }, []);
+      });
+  }, dependencies);
 
-  return [isLoading, fetchedData];
+  return [isLoading as boolean, fetchedData as any];
 
 };
 
-export const ManagerAPIGet = (url, request, dependencies) => {
+export const ManagerAPIGet = (url: string, request: AxiosRequestConfig, dependencies: []) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [fetchedData, setFetchedData] = useState([]);
@@ -45,14 +45,14 @@ export const ManagerAPIGet = (url, request, dependencies) => {
         setFetchedData(response.data);
       }, res => {
         setIsLoading(false);
-      })
+      });
   }, dependencies);
 
-  return [isLoading, fetchedData];
+  return [isLoading as boolean, fetchedData as any];
 
 };
 
-export const ManagerAPIPut = (url, request) => {
+export const ManagerAPIPut = (url: string, request: AxiosRequestConfig, dependencies: []) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [fetchedData, setFetchedData] = useState(null);
@@ -64,14 +64,14 @@ export const ManagerAPIPut = (url, request) => {
         setFetchedData(response.data);
       }, res => {
         setIsLoading(false);
-      })
-  }, []);
+      });
+  }, dependencies);
 
-  return [isLoading, fetchedData];
+  return [isLoading as boolean, fetchedData as any];
 
 };
 
-export const ManagerAPIPatch = (url, data, request) => {
+export const ManagerAPIPatch = (url: string, data: object, request: AxiosRequestConfig, dependencies: []) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [fetchedData, setFetchedData] = useState(null);
@@ -83,9 +83,9 @@ export const ManagerAPIPatch = (url, data, request) => {
         setFetchedData(response.data);
       }, res => {
         setIsLoading(false);
-      })
-  }, []);
+      });
+  }, dependencies);
 
-  return [isLoading, fetchedData];
+  return [isLoading as boolean, fetchedData as any];
 
 };
