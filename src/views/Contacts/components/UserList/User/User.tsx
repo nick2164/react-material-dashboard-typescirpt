@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import './User.css';
-import { Avatar, Divider, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
-import ImageIcon from '@material-ui/icons/Image';
+import {
+  Avatar,
+  Divider,
+  IconButton,
+  ListItem,
+  ListItemAvatar, ListItemIcon,
+  ListItemSecondaryAction,
+  ListItemText
+} from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserNinja, faBaby, faBlind,faFemale,faHiking,faMale,faCrown,faBars } from '@fortawesome/free-solid-svg-icons';
 
 interface UserProps {
   user: {
@@ -18,33 +27,42 @@ interface UserProps {
 const User = (props: UserProps) => {
 
   const [color, setColor] = useState('');
+  const [icon, setIcon] = useState();
+
+  const icons = [faUserNinja,faBaby, faBlind,faFemale,faHiking,faMale,faCrown];
 
   useEffect(() => {
     switch (props.user.presence.suggestedIconDescription) {
       case 'available':
-        setColor('success');
+        setColor('green');
         break;
       case 'away':
-        setColor('warning');
+        setColor('yellow');
         break;
       case 'busy':
-        setColor('danger');
+        setColor('red');
         break;
       case 'working-from-home':
-        setColor('primary');
+        setColor('blue');
         break;
       default:
-        setColor('info');
+        setColor('gray');
         break;
     }
   }, []);
 
+  useEffect(() => {
+    setIcon(icons[Math.floor(Math.random() * icons.length)]);
+
+  }, []);
+
+
   return (
     <React.Fragment>
-      <ListItem color={color}>
+      <ListItem button>
         <ListItemAvatar>
           <Avatar>
-            <ImageIcon/>
+            <FontAwesomeIcon icon={icon}/>
           </Avatar>
         </ListItemAvatar>
         <ListItemText primary={props.user.firstName + ' ' + props.user.lastName} secondary="Jan 9, 2014"/>

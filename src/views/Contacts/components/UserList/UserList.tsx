@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { getUsers, get1600FakeUsers, GetUserInterface } from 'hooks/managerAPI/users';
+import { get1600FakeUsers, GetUserInterface } from 'hooks/managerAPI/users';
 import User from './User/User';
 import './UserList.css';
 import { AutoSizer, List } from 'react-virtualized';
-import { Portlet, PortletHeader } from '../../../../components';
-import { Container, Divider, Drawer, Grid, Input, makeStyles, Paper } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
+import SearchAppBar from './Components/SearchAppBar';
+import { InputBaseComponentProps, InputBaseProps } from '@material-ui/core/InputBase';
 
 interface UserListInterface {
   height: number
@@ -16,21 +17,8 @@ const UserList = (props: UserListInterface) => {
   const [fetchedData] = get1600FakeUsers('papa', []);
   const [viewableUsers, setViewableUsers] = useState<[] | GetUserInterface[]>([]);
   const [filteredUserList, setFilteredUserList] = useState<[] | GetUserInterface[]>([]);
-  const [searchedWord, setSearchedWord] = useState<string>('');
-  const [viewWidth, setViewWidth] = useState<number>(0);
+  const [searchWord, setSearchWord] = useState('');
 
-
-
-  // Component styles
-  const useStyles = makeStyles(theme => ({
-    root: {
-      height: props.height
-    },
-    item: {
-      height: '100%'
-    },
-    test: {}
-  }));
 
   if (localStorage.getItem('userList') === null) {
     localStorage.setItem('userList', JSON.stringify([]));
@@ -108,63 +96,54 @@ const UserList = (props: UserListInterface) => {
 
   useEffect(() => {
 
-    if (searchedWord === '') {
+    if (searchWord === '') {
       setFilteredUserList(sortFirstName(viewableUsers));
     } else {
-      setFilteredUserList(sortFirstName(getFilteredUsers(searchedWord, viewableUsers)));
+      setFilteredUserList(sortFirstName(getFilteredUsers(searchWord, viewableUsers)));
     }
 
-  }, [searchedWord, viewableUsers]);
+  }, [searchWord, viewableUsers]);
 
-  const setSearch = (searchWord: string) => {
-    setSearchedWord(searchWord);
+  const setSearch = (props: InputBaseComponentProps) => {
+    console.log(props.target.value);
+
+    setSearchWord(props.target.value);
   };
 
   const userList = localStorage.getItem('userList');
 
   return (
-    <Portlet classes={useStyles}>
-      <PortletHeader>
-        <i className="fa fa-address-book fa-lg"/>
-        Medarbejdere
-        <Input className={'search'} placeholder='Search...'/>
-      </PortletHeader>
-      <Grid spacing={2} container={true} component={Grid}>
-        <Grid item={true} component={Grid}>
-          {(userList !== null) ? (JSON.parse(userList).length < 1 ?
-              (<p>Loading</p>) : // Check if there is found any userList in the local storage and decide if loading screen is showed..
-              (<AutoSizer disableHeight={true}>
-                {({ width }) => {
-                  return (
-                    <List
-                      height={props.height}
-                      width={width * 0.3}
-                      rowHeight={60}
-                      rowCount={filteredUserList.length}
-                      rowRenderer={
-                        ({
-                           key,         // Unique key within array of rows
-                           index,       // Index of row within collection
-                           style        // Style object to be applied to row (to position it)
-                         }) =>
-                          <div style={style} key={key}>
-                            <User
-                              user={filteredUserList[index]}
-                            />
-                          </div>
-                      }
-                    />
-                  );
-                }}
-              </AutoSizer>)
-          ) : (null)
-          }
-        </Grid>
-        <Grid item={true} component={Grid}>
-          <h1>Loll</h1>
-        </Grid>
-      </Grid>
-    </Portlet>
+    <Paper>
+      <SearchAppBar searchWord={searchWord} setSearchWord={setSearch} title={'Kontakter'}/>
+      {(userList !== null) ? (JSON.parse(userList).length < 1 ?
+          (<p>Loading</p>) : // Check if there is found any userList in the local storage and decide if loading screen is showed..
+          (<AutoSizer disableHeight={true}>
+            {({ width }) => {
+              return (
+                <List
+                  height={props.height}
+                  width={width * 0.3}
+                  rowHeight={65}
+                  rowCount={filteredUserList.length}
+                  rowRenderer={
+                    ({
+                       key,         // Unique key within array of rows
+                       index,       // Index of row within collection
+                       style        // Style object to be applied to row (to position it)
+                     }) =>
+                      <div style={style} key={key}>
+                        <User
+                          user={filteredUserList[index]}
+                        />
+                      </div>
+                  }
+                />
+              );
+            }}
+          </AutoSizer>)
+      ) : (null)
+      }
+    </Paper>
   );
 };
 

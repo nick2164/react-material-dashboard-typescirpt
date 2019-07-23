@@ -28,6 +28,8 @@ import {
 } from '@material-ui/icons';
 // Component styles
 import useStyles from './useStyles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAddressBook, faUsers, faVoicemail } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
   className?: string;
@@ -42,41 +44,25 @@ const Sidebar: React.FC<Props> = ({ className }) => {
       <div className={classes.logoWrapper}>
         <Link className={classes.logoLink} to="/">
           <img
-            alt="Brainalytica logo"
+            alt="evercall"
             className={classes.logoImage}
-            src="/images/logos/brainalytica_logo.svg"
+            src="/images/logos/evercall.svg"
           />
         </Link>
       </div>
       <Divider className={classes.logoDivider}/>
-      <div className={classes.profile}>
-        <Link to="/account">
-          <Avatar
-            alt="Roman Kutepov"
-            className={classes.avatar}
-            src="/images/avatars/avatar_1.png"
-          />
-        </Link>
-        <Typography className={classes.nameText} variant="h6">
-          Roman Kutepov
-        </Typography>
-        <Typography className={classes.bioText} variant="caption">
-          Brain Director
-        </Typography>
-      </div>
-      <Divider className={classes.profileDivider}/>
       <List component="div" disablePadding>
         <ListItem
           activeClassName={classes.activeListItem}
           className={classes.listItem}
           component={NavLink}
-          to="/dashboard">
+          to="/contacts">
           <ListItemIcon className={classes.listItemIcon}>
-            <DashboardIcon/>
+            <FontAwesomeIcon icon={faAddressBook}/>
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
-            primary="Dashboard"
+            primary="Kontakter"
           />
         </ListItem>
         <ListItem
@@ -85,24 +71,24 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/users">
           <ListItemIcon className={classes.listItemIcon}>
-            <PeopleIcon/>
+            <FontAwesomeIcon icon={faUsers}/>
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
-            primary="Users"
+            primary="Grupper"
           />
         </ListItem>
         <ListItem
           activeClassName={classes.activeListItem}
           className={classes.listItem}
           component={NavLink}
-          to="/products">
+          to="/voicemails">
           <ListItemIcon className={classes.listItemIcon}>
-            <ShoppingBasketIcon/>
+            <FontAwesomeIcon icon={faVoicemail}/>
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
-            primary="Products"
+            primary="Telefonsvarer"
           />
         </ListItem>
         <ListItem
