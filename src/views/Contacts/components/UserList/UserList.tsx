@@ -4,7 +4,7 @@ import User from './User/User';
 import './UserList.css';
 import { AutoSizer, List } from 'react-virtualized';
 import { Paper } from '@material-ui/core';
-import SearchAppBar from './Components/SearchAppBar';
+import {AppSearchBar} from 'components/index';
 import { InputBaseComponentProps, InputBaseProps } from '@material-ui/core/InputBase';
 
 interface UserListInterface {
@@ -105,8 +105,6 @@ const UserList = (props: UserListInterface) => {
   }, [searchWord, viewableUsers]);
 
   const setSearch = (props: InputBaseComponentProps) => {
-    console.log(props.target.value);
-
     setSearchWord(props.target.value);
   };
 
@@ -114,7 +112,7 @@ const UserList = (props: UserListInterface) => {
 
   return (
     <Paper>
-      <SearchAppBar searchWord={searchWord} setSearchWord={setSearch} title={'Kontakter'}/>
+      <AppSearchBar searchWord={searchWord} setSearchWord={setSearch} title={'Kontakter'}/>
       {(userList !== null) ? (JSON.parse(userList).length < 1 ?
           (<p>Loading</p>) : // Check if there is found any userList in the local storage and decide if loading screen is showed..
           (<AutoSizer disableHeight={true}>

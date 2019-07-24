@@ -47,7 +47,7 @@ export const getUser = (id: string): Promise<{ user: User }> => {
         });
       } else {
         reject({
-          error: 'User not found'
+          error: 'Queue not found'
         });
       }
     }, 500);

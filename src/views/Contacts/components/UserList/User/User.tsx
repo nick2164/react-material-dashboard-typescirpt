@@ -10,18 +10,21 @@ import {
   ListItemText
 } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserNinja, faBaby, faBlind,faFemale,faHiking,faMale,faCrown,faBars } from '@fortawesome/free-solid-svg-icons';
+import {
+  faUserNinja,
+  faBaby,
+  faBlind,
+  faFemale,
+  faHiking,
+  faMale,
+  faCrown,
+  faBars,
+  faUserAstronaut
+} from '@fortawesome/free-solid-svg-icons';
+import { GetUserInterface } from '../../../../../hooks/managerAPI/users';
 
 interface UserProps {
-  user: {
-    presence: {
-      suggestedIconDescription: string,
-      statusName: string,
-    },
-    userID: number,
-    firstName: string,
-    lastName: string,
-  }
+  user: GetUserInterface
 }
 
 const User = (props: UserProps) => {
@@ -29,7 +32,7 @@ const User = (props: UserProps) => {
   const [color, setColor] = useState('');
   const [icon, setIcon] = useState();
 
-  const icons = [faUserNinja,faBaby, faBlind,faFemale,faHiking,faMale,faCrown];
+  const icons = [faUserNinja,faBaby, faBlind,faFemale,faHiking,faMale,faCrown,faUserAstronaut];
 
   useEffect(() => {
     switch (props.user.presence.suggestedIconDescription) {

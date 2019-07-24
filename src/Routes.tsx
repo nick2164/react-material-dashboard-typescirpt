@@ -4,11 +4,12 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Dashboard from './views/Dashboard';
 import Account from './views/Account';
 import Contacts from './views/Contacts';
-import Voicemailbox from './views/Voicemailbox';
-import Statistics from './views/Statistics';
-import Recordings from './views/Recordings';
-import Audit from './views/Audit';
+import Queues from './views/Queues';
 import NotFound from './views/NotFound';
+// import Voicemailbox from './views/Voicemailbox';
+// import Statistics from './views/Statistics';
+// import Recordings from './views/Recordings';
+// import Audit from './views/Audit';
 // import ProductList from './views/ProductList';
 // import UserList from './views/UserList';
 // import Typography from './views/Typography';
@@ -25,10 +26,11 @@ const Routes: React.FC = () => {
       <Route component={Dashboard} exact path="/dashboard"/>
       <Route component={Account} exact path="/account"/>
       <Route component={Contacts} exact path="/contacts"/>
-      <Route component={Voicemailbox} exact path="/voicemailbox"/>
-      <Route component={Statistics} exact path="/statistics"/>
-      <Route component={Recordings} exact path="/recordings"/>
-      <Route component={Audit} exact path="/audit"/>
+      <Route component={Queues} exact path="/queues"/>
+      {/*<Route component={Voicemailbox} exact path="/voicemailbox"/>*/}
+      {/*<Route component={Statistics} exact path="/statistics"/>*/}
+      {/*<Route component={Recordings} exact path="/recordings"/>*/}
+      {/*<Route component={Audit} exact path="/audit"/>*/}
       <Route component={NotFound} exact path="/not-found"/>
       {/*<Route component={UserList} exact path="/users"/>*/}
       {/*<Route component={ProductList} exact path="/products"/>*/}

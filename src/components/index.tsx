@@ -8,3 +8,4 @@ export { default as PortletHeader } from './PortletHeader';
 export { default as PortletToolbar } from './PortletToolbar';
 export { default as SearchInput } from './SearchInput';
 export { default as Status } from './Status';
+export { default as AppSearchBar } from './AppSearchBar/AppSearchBar';

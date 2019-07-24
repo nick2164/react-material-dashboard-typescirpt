@@ -6,13 +6,13 @@ import InputBase, { InputBaseComponentProps } from '@material-ui/core/InputBase'
 import { createStyles, fade, makeStyles, Theme } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 
-interface SearchAppBarProps {
+interface AppSearchBarProps {
   title: string,
   searchWord: string,
   setSearchWord: (props: InputBaseComponentProps) => void
 }
 
-const SearchAppBar = (props: SearchAppBarProps) => {
+const AppSearchBar = (props: AppSearchBarProps) => {
 
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -102,5 +102,5 @@ const SearchAppBar = (props: SearchAppBarProps) => {
 
 };
 
-export default SearchAppBar;
+export default AppSearchBar;
 

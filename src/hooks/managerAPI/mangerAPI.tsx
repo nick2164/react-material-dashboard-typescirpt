@@ -35,7 +35,7 @@ export const ManagerAPIPost = (url: string, data: object, request: AxiosRequestC
 export const ManagerAPIGet = (url: string, request: AxiosRequestConfig, dependencies: []) => {
 
   const [isLoading, setIsLoading] = useState(false);
-  const [fetchedData, setFetchedData] = useState([]);
+  const [fetchedData, setFetchedData]:any = useState();
 
   useEffect(() => {
     setIsLoading(true);
@@ -48,7 +48,7 @@ export const ManagerAPIGet = (url: string, request: AxiosRequestConfig, dependen
       });
   }, dependencies);
 
-  return [isLoading as boolean, fetchedData as any];
+  return [isLoading, fetchedData];
 
 };
 

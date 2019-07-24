@@ -69,7 +69,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           activeClassName={classes.activeListItem}
           className={classes.listItem}
           component={NavLink}
-          to="/users">
+          to="/groups">
           <ListItemIcon className={classes.listItemIcon}>
             <FontAwesomeIcon icon={faUsers}/>
           </ListItemIcon>
@@ -95,13 +95,13 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           activeClassName={classes.activeListItem}
           className={classes.listItem}
           component={NavLink}
-          to="/sign-in">
+          to="/queues">
           <ListItemIcon className={classes.listItemIcon}>
-            <LockOpenIcon/>
+            <FontAwesomeIcon icon={faUsers}/>
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
-            primary="Authentication"
+            primary="Køer"
           />
         </ListItem>
         <ListItem

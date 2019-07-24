@@ -1,7 +1,7 @@
 import { ManagerAPIGet } from './mangerAPI';
 
-export interface GetPhoneInterface {
-  forwarding: GetPhoneForwarding,
+export interface PhoneInterface {
+  forwarding: PhoneForwarding,
   displayName: string,
   phoneNumber: string,
   validUntil: string,
@@ -10,47 +10,57 @@ export interface GetPhoneInterface {
   voicemailCount: number
 }
 
-export interface GetPhoneForwarding {
-  unconditional: GetPhoneForwardingUnconditional,
-  noAnswer: GetPhoneForwardingNoAnswer,
-  busy: GetPhoneForwardingBusy,
+export interface PhoneForwarding {
+  unconditional: PhoneForwardingUnconditional,
+  noAnswer: PhoneForwardingNoAnswer,
+  busy: PhoneForwardingBusy,
 }
 
-export interface GetPhoneForwardingUnconditional {
+export interface PhoneForwardingUnconditional {
   phoneNumber: string
 }
 
-export interface GetPhoneForwardingNoAnswer {
+export interface PhoneForwardingNoAnswer {
   phoneNumber: string,
   delay: number
 }
 
-export interface GetPhoneForwardingBusy {
+export interface PhoneForwardingBusy {
   phoneNumber: string
 }
 
-export interface GetPhonesInterface {
-  [index: number]: GetPhoneInterface
+export interface PhonesInterface {
+  [index: number]: PhoneInterface
 }
 
-export function getPhones(token: string, dependencies: []) {
+interface GetPhonesInterface {
+  isLoading: boolean,
+  fetchedData: PhonesInterface
+}
+
+export function GetPhones(token: string, dependencies: []): GetPhonesInterface {
 
   let isLoading: boolean;
-  let fetchedData: GetPhonesInterface;
+  let fetchedData: PhonesInterface;
 
   [isLoading, fetchedData] = ManagerAPIGet(`/phones`, { headers: { 'X-Token': token } }, dependencies);
 
-  return [isLoading, fetchedData];
+  return {isLoading, fetchedData};
 
 }
 
-export function getPhone(token: string, phoneID: number, dependencies: []) {
+interface GetPhoneInterface {
+  isLoading: boolean,
+  fetchedData: PhoneInterface
+}
+
+export const GetPhone = (token: string, phoneID: string, dependencies: []): GetPhoneInterface => {
 
   let isLoading: boolean;
-  let fetchedData: GetPhoneInterface;
+  let fetchedData: PhoneInterface;
 
   [isLoading, fetchedData] = ManagerAPIGet(`/phone/${phoneID}`, { headers: { 'X-Token': token } }, dependencies);
 
-  return [isLoading, fetchedData];
+  return {isLoading,fetchedData};
 
-}
+};
