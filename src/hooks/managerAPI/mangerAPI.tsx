@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import React, { useEffect, useState } from 'react';
+import { DependencyList, useEffect, useState } from 'react';
 
 const baseURL = 'https://api.everconnect.dk/manager/v1';
 
@@ -13,7 +13,7 @@ const defaultConfig = (request: AxiosRequestConfig) => {
   return request;
 };
 
-export const ManagerAPIPost = (url: string, data: object, request: AxiosRequestConfig, dependencies: []) => {
+export const ManagerAPIPost = (url: string, data: object, request: AxiosRequestConfig, dependencies:DependencyList) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [fetchedData, setFetchedData] = useState(null);
@@ -32,10 +32,11 @@ export const ManagerAPIPost = (url: string, data: object, request: AxiosRequestC
 
 };
 
-export const ManagerAPIGet = (url: string, request: AxiosRequestConfig, dependencies: []) => {
+export const ManagerAPIGet = (url: string, request: AxiosRequestConfig, dependencies: DependencyList) => {
 
+  // TODO: Make sure to validate the data, that comes back, to see if it matches what we think it will. If not, throw some kind of error, about contacting evercall
   const [isLoading, setIsLoading] = useState(false);
-  const [fetchedData, setFetchedData]:any = useState();
+  const [fetchedData, setFetchedData]: any = useState();
 
   useEffect(() => {
     setIsLoading(true);
@@ -52,7 +53,7 @@ export const ManagerAPIGet = (url: string, request: AxiosRequestConfig, dependen
 
 };
 
-export const ManagerAPIPut = (url: string, request: AxiosRequestConfig, dependencies: []) => {
+export const ManagerAPIPut = (url: string, request: AxiosRequestConfig, dependencies: DependencyList) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [fetchedData, setFetchedData] = useState(null);
@@ -71,7 +72,7 @@ export const ManagerAPIPut = (url: string, request: AxiosRequestConfig, dependen
 
 };
 
-export const ManagerAPIPatch = (url: string, data: object, request: AxiosRequestConfig, dependencies: []) => {
+export const ManagerAPIPatch = (url: string, data: object, request: AxiosRequestConfig, dependencies: DependencyList) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [fetchedData, setFetchedData] = useState(null);

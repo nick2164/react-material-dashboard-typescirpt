@@ -5,7 +5,7 @@ import { Container, makeStyles } from '@material-ui/core';
 // Shared layouts
 import { Dashboard as DashboardLayout } from 'layouts';
 // Custom components
-import { UserList } from './components/index';
+import { UserList } from 'components/index';
 
 // Component styles
 const useStyles = makeStyles(theme => ({

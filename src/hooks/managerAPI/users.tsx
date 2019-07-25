@@ -62,7 +62,7 @@ export function get1600FakeUsers(token: string, dependencies: []) {
       }
     );
   }
-  return [list];
+  return list;
 
 }
 

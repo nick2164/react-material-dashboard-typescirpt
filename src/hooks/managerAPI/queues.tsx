@@ -1,6 +1,5 @@
 import { ManagerAPIGet } from './mangerAPI';
-import { loremIpsum } from 'lorem-ipsum';
-import { GetUserInterface } from './users';
+import { loremIpsum, LoremIpsum } from 'lorem-ipsum';
 
 export interface GetQueuesInterface {
   [index: number]: GetQueueInterface,
@@ -40,27 +39,13 @@ export interface GetQueueMembersInterface {
 export function get160FakeQueues(token: string, dependencies: []) {
 
   let list: GetQueueInterface[] = [];
-  const descriptions = ['Kø Alle', 'Space Invaders', 'Mødregruppen', 'For alle os der kan!'];
-
-  const member: GetQueueMemberInterface = {
-    status: {
-      device: 'available',
-      callConfirm: false,
-      priority: 0,
-      callsTaken: 8,
-      paused: false
-    },
-    phoneNumber: '81110608'
-  };
 
   for (let i = 0; i < 160; i++) {
 
-    let description = descriptions[Math.floor(Math.random() * descriptions.length)];
-
     list.push(
       {
-        description: description,
-        members: [member],
+        description: loremIpsum({ count: 2, units: 'word'}),
+        members: getFakeQueueMembers('', 0, []),
         calls: {
           callerCount: 41,
           averageHoldTime: 10,
@@ -75,7 +60,32 @@ export function get160FakeQueues(token: string, dependencies: []) {
       }
     );
   }
-  return [list];
+  return list;
+
+}
+
+export function getFakeQueueMembers(token: string, queueID: number, dependencies: []) {
+
+  let list: GetQueueMemberInterface[] = [];
+
+  const statusName = ['RINGING', 'UNKNOWN', 'BUSY', 'AVAILABLE'];
+
+  for (let i = 0; i < 200; i++) {
+
+    list.push(
+      {
+        status: {
+          device: statusName[Math.floor(Math.random() * statusName.length)],
+          callConfirm: false,
+          priority: (Math.floor(Math.random() * 8) + 1),
+          callsTaken: (Math.floor(Math.random() * 50) + 1),
+          paused: Math.random() >= 0.5
+        },
+        phoneNumber: (Math.floor(Math.random() * 99999999) + 1000000).toString()
+      }
+    );
+  }
+  return list;
 
 }
 

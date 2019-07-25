@@ -28,7 +28,8 @@ const AppSearchBar = (props: AppSearchBarProps) => {
         [theme.breakpoints.up('sm')]: {
           display: 'block'
         },
-        color: 'inherit'
+        color: 'inherit',
+        overflow: 'visible'
       },
       search: {
         position: 'relative',
@@ -58,12 +59,12 @@ const AppSearchBar = (props: AppSearchBarProps) => {
       },
       inputInput: {
         padding: theme.spacing(1, 1, 1, 7),
-        transition: theme.transitions.create('width'),
+        transition: theme.transitions.create('width'), // TODO: See if this can get seamless with 100% in width on hover.
         width: '100%',
         [theme.breakpoints.up('sm')]: {
           width: 120,
           '&:focus': {
-            width: 200
+            width: '100%'
           }
         }
       }
@@ -76,7 +77,7 @@ const AppSearchBar = (props: AppSearchBarProps) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography className={classes.title} variant="h3" noWrap >
             {props.title}
           </Typography>
           <div className={classes.search}>
@@ -84,12 +85,12 @@ const AppSearchBar = (props: AppSearchBarProps) => {
               <SearchIcon/>
             </div>
             <InputBase
-              placeholder="Search…"
+              placeholder="Søg…"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput
               }}
-              inputProps={{ 'aria-label': 'Search' }}
+              inputProps={{ 'aria-label': 'Søg' }}
               onKeyUp={props.setSearchWord}
               aria-valuetext={props.searchWord}
             />

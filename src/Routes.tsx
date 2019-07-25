@@ -2,7 +2,6 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 // Views
 import Dashboard from './views/Dashboard';
-import Account from './views/Account';
 import Contacts from './views/Contacts';
 import Queues from './views/Queues';
 import NotFound from './views/NotFound';
@@ -24,7 +23,6 @@ const Routes: React.FC = () => {
     <Switch>
       <Redirect exact from="/" to="/dashboard"/>
       <Route component={Dashboard} exact path="/dashboard"/>
-      <Route component={Account} exact path="/account"/>
       <Route component={Contacts} exact path="/contacts"/>
       <Route component={Queues} exact path="/queues"/>
       {/*<Route component={Voicemailbox} exact path="/voicemailbox"/>*/}

@@ -4,26 +4,13 @@ import { Link, NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 // Material helpers
 // Material components
-import {
-  Avatar,
-  Divider,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  ListSubheader,
-  Typography
-} from '@material-ui/core';
+import { Divider, List, ListItem, ListItemIcon, ListItemText, ListSubheader } from '@material-ui/core';
 // Material icons
 import {
   AccountBoxOutlined as AccountBoxIcon,
-  DashboardOutlined as DashboardIcon,
   ImageOutlined as ImageIcon,
   InfoOutlined as InfoIcon,
-  LockOpenOutlined as LockOpenIcon,
-  PeopleOutlined as PeopleIcon,
   SettingsOutlined as SettingsIcon,
-  ShoppingBasketOutlined as ShoppingBasketIcon,
   TextFields as TextFieldsIcon
 } from '@material-ui/icons';
 // Component styles

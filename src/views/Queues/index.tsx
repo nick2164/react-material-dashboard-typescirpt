@@ -5,16 +5,13 @@ import { Container, makeStyles } from '@material-ui/core';
 // Shared layouts
 import { Dashboard as DashboardLayout } from 'layouts';
 // Custom components
-import { QueueList } from './components/index';
+import { Queues as QueuesView } from 'components/index';
 
 // Component styles
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(4),
     flexGrow: 1
-  },
-  item: {
-    height: '100%'
   }
 }));
 
@@ -23,7 +20,7 @@ const Queues = () => {
   return (
     <DashboardLayout title="Køer">
       <Container maxWidth={false} classes={classes}>
-        <QueueList height={650}/>
+        <QueuesView height={900}/>
       </Container>
     </DashboardLayout>
   );
