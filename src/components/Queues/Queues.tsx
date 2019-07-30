@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GetQueueInterface } from '../../hooks/managerAPI/queues';
+import { GetQueueInterface, queuePlaceholder } from '../../hooks/managerAPI/queues';
 import { createStyles, Grid, makeStyles, Paper, Theme } from '@material-ui/core';
 import QueueList from './components/QueueList/QueueList';
 import QueueMemberList from './components/QueueMemberList/QueueMemberList';
@@ -37,22 +37,6 @@ const useStyles = makeStyles((theme: Theme) =>
 const Queues = (props: QueuesInterface) => {
 
   const classes = useStyles();
-
-  const queuePlaceholder:GetQueueInterface = {
-    description: '',
-    queueID: 0,
-    calls: {
-      averageHoldTime: 0,
-      callerCount: 0,
-      longestHoldTime: 0,
-      totalTalkTime: 0
-    },
-    members: [],
-    settings: {
-      ringTime: 0,
-      timeout: 0
-    }
-  };
 
   const [selectedQueue, setSelectedQueue] = useState(queuePlaceholder);
 

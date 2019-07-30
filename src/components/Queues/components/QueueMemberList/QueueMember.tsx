@@ -1,14 +1,7 @@
 import { GetQueueMemberInterface } from 'hooks/managerAPI/queues';
 import { loremIpsum } from 'lorem-ipsum';
-import {
-  faEraser,
-  faHeadset,
-  faMugHot,
-  faQuestion, faThumbsDown,
-  faThumbsUp,
-  IconDefinition
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon, Props as FontAwesomeProps } from '@fortawesome/react-fontawesome';
+import { faHeadset, faMugHot, faQuestion, faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
 
 export interface QueueMemberReturnInterface {
@@ -17,10 +10,6 @@ export interface QueueMemberReturnInterface {
   status: string,
   callsTaken: number,
   statusIcon: JSX.Element
-}
-
-interface QueueMemberInterface {
-  queueMember: GetQueueMemberInterface
 }
 
 const QueueMember = (props: GetQueueMemberInterface): QueueMemberReturnInterface => {
@@ -52,12 +41,12 @@ const QueueMember = (props: GetQueueMemberInterface): QueueMemberReturnInterface
       returnData.statusIcon = <FontAwesomeIcon icon={faThumbsUp} size={'2x'}/>;
       break;
   }
-  if(props.status.paused) {
+  if (props.status.paused) {
     returnData.status = 'Pause';
-    returnData.statusIcon = <FontAwesomeIcon icon={faMugHot} size={'2x'}/>
+    returnData.statusIcon = <FontAwesomeIcon icon={faMugHot} size={'2x'}/>;
   }
 
-  returnData.name = loremIpsum({units: 'word', count: Math.floor(Math.random()*3) + 2});
+  returnData.name = loremIpsum({ units: 'word', count: Math.floor(Math.random() * 3) + 2 });
 
   return returnData;
 };

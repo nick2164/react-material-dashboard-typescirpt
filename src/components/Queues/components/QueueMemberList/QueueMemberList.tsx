@@ -1,22 +1,15 @@
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import { InputBaseComponentProps } from '@material-ui/core/InputBase';
-import { getFakeQueueMembers, GetQueueInterface, GetQueueMemberInterface } from 'hooks/managerAPI/queues';
+import {
+  getFakeQueueMembers,
+  GetQueueInterface,
+  GetQueueMemberInterface,
+  getQueueMembers
+} from 'hooks/managerAPI/queues';
+import MUIDataTable from 'mui-datatables';
 
 import QueueMember from './QueueMember';
 import 'react-virtualized/styles.css';
-import MaterialTable, { Icons } from 'material-table';
-import {
-  faArrowDown,
-  faCheck,
-  faChessBoard,
-  faEdit,
-  faEraser,
-  faFileExport,
-  faPlus,
-  faRemoveFormat,
-  faSearch
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface QueueMemberListInterface {
   height: number,
@@ -26,48 +19,37 @@ interface QueueMemberListInterface {
 const QueueMemberList = (props: QueueMemberListInterface) => {
 
   const [searchWord, setSearchWord] = useState('');
-  const fetchedData = getFakeQueueMembers('papa', 0, []);
+  // const fetchedData = getFakeQueueMembers('papa', 0, []);
+  const fetchedData = getQueueMembers('nboatevercall', props.selectedQueue.queueID, [props.selectedQueue]);
   const [viewableQueueMembers, setViewableQueueMembers] = useState(props.selectedQueue.members);
   const [filteredQueueMembers, setFilteredQueueMembers] = useState(props.selectedQueue.members);
 
-  const tableIcons: Icons = {
-    Add: forwardRef((props, ref) => <FontAwesomeIcon {...props} {...ref} icon={faPlus}/>),
-    Check: forwardRef((props, ref) => <FontAwesomeIcon {...props} {...ref} icon={faCheck}/>),
-    Clear: forwardRef((props, ref) => <FontAwesomeIcon {...props} {...ref} icon={faCheck}/>),
-    Delete: forwardRef((props, ref) => <FontAwesomeIcon {...props} {...ref} icon={faRemoveFormat}/>),
-    DetailPanel: forwardRef((props, ref) => <FontAwesomeIcon {...props} {...ref} icon={faChessBoard}/>),
-    Edit: forwardRef((props, ref) => <FontAwesomeIcon {...props} {...ref} icon={faEdit}/>),
-    Export: forwardRef((props, ref) => <FontAwesomeIcon {...props} {...ref} icon={faFileExport}/>),
-    Search: forwardRef((props, ref) => <FontAwesomeIcon {...props} {...ref} icon={faSearch}/>),
-    SortArrow: forwardRef((props, ref) => <FontAwesomeIcon {...props} {...ref} icon={faArrowDown}/>),
-    ResetSearch: forwardRef((props, ref) => <FontAwesomeIcon {...props} {...ref} icon={faEraser}/>)
-  };
+  const fetchedQueueMembers = useRef(props.selectedQueue.members);
 
-  if (localStorage.getItem('queueMemberList') === null) {
-    localStorage.setItem('queueMemberList', JSON.stringify([]));
+  fetchedQueueMembers.current = fetchedData;
+
+  if (localStorage.getItem(`queue${props.selectedQueue.queueID}MemberList`) === null) {
+    localStorage.setItem(`queue${props.selectedQueue.queueID}MemberList`, JSON.stringify([]));
   }
 
   const viewableMemberHandler = () => {
-    const queueMemberList = localStorage.getItem('queueMemberList');
+    const queueMemberList = localStorage.getItem(`queue${props.selectedQueue.queueID}MemberList`);
     if (queueMemberList !== null) {
       setViewableQueueMembers(JSON.parse(queueMemberList));
-      if (fetchedData.length > 0) {
+      if (fetchedQueueMembers.current.length > 0) {
         if (JSON.parse(queueMemberList).length < 1) {
-          localStorage.setItem('queueMemberList', JSON.stringify(fetchedData));
+          localStorage.setItem(`queue${props.selectedQueue.queueID}MemberList`, JSON.stringify(fetchedQueueMembers.current));
           setViewableQueueMembers(JSON.parse(queueMemberList));
         } else {
-          if (localStorage.getItem('queueMemberList') !== JSON.stringify(fetchedData)) {
-            localStorage.setItem('queueMemberList', JSON.stringify(fetchedData));
+          if (localStorage.getItem(`queue${props.selectedQueue.queueID}MemberList`) !== JSON.stringify(fetchedQueueMembers.current)) {
+            localStorage.setItem(`queue${props.selectedQueue.queueID}MemberList`, JSON.stringify(fetchedQueueMembers.current));
             setViewableQueueMembers(JSON.parse(queueMemberList));
           }
         }
       }
     }
-    console.log(fetchedData);
   };
-  useEffect(() => {
-    viewableMemberHandler();
-  }, []);
+
   useEffect(() => {
     viewableMemberHandler();
   }, [props.selectedQueue]);
@@ -102,25 +84,35 @@ const QueueMemberList = (props: QueueMemberListInterface) => {
   return (
     <React.Fragment>
       {/*<AppSearchBar searchWord={searchWord} setSearchWord={setSearch} title={'Kø medlemmer'}/>*/}
-      <MaterialTable
-        style={{
-          borderRadius: 0,
-          height: props.height + 64,
-          backgroundColor: 'ghostwhite'
-        }}
+      <MUIDataTable
         columns={[
-          { title: '', field: 'statusIcon' },
-          { title: 'Nummer', field: 'phoneNumber' },
-          { title: 'Navn', field: 'name' },
-          { title: 'Status', field: 'status' },
-          { title: 'Opkald besvaret', field: 'callsTaken' },
+          {
+            label: '', name: 'statusIcon', options: {
+              filter: true,
+              sort: true
+            }
+          },
+          {
+            label: 'Nummer', name: 'phoneNumber', options: {
+              filter: true,
+              sort: true
+            }
+          },
+          {
+            label: 'Navn', name: 'name', options: {
+              filter: true,
+              sort: true
+            }
+          },
+          {
+            label: 'Status', name: 'status', options: {
+              filter: true,
+              sort: true
+            }
+          },
+          { label: 'Opkald besvaret', name: 'callsTaken' }
         ]}
         title={<h2>Kø medlemmer</h2>}
-        options={{
-          maxBodyHeight: props.height,
-          pageSize: filteredQueueMembers.length,
-          paging: false
-        }}
         data={
           filteredQueueMembers.map(value => {
             return (
@@ -128,7 +120,12 @@ const QueueMemberList = (props: QueueMemberListInterface) => {
             );
           })
         }
-        icons={tableIcons}
+
+        options={{
+          pagination: true,
+          responsive: 'scroll'
+        }}
+
       />
     </React.Fragment>
   );

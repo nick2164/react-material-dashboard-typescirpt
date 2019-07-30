@@ -36,7 +36,7 @@ export const ManagerAPIGet = (url: string, request: AxiosRequestConfig, dependen
 
   // TODO: Make sure to validate the data, that comes back, to see if it matches what we think it will. If not, throw some kind of error, about contacting evercall
   const [isLoading, setIsLoading] = useState(false);
-  const [fetchedData, setFetchedData]: any = useState();
+  const [fetchedData, setFetchedData]: any = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -49,7 +49,7 @@ export const ManagerAPIGet = (url: string, request: AxiosRequestConfig, dependen
       });
   }, dependencies);
 
-  return [isLoading, fetchedData];
+  return [isLoading,fetchedData];
 
 };
 

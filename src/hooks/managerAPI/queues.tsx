@@ -1,9 +1,5 @@
 import { ManagerAPIGet } from './mangerAPI';
-import { loremIpsum, LoremIpsum } from 'lorem-ipsum';
-
-export interface GetQueuesInterface {
-  [index: number]: GetQueueInterface,
-}
+import { loremIpsum } from 'lorem-ipsum';
 
 export interface GetQueueInterface {
   description: string,
@@ -32,19 +28,32 @@ export interface GetQueueMemberInterface {
   phoneNumber: string
 }
 
-export interface GetQueueMembersInterface {
-  [index: number]: GetQueueMemberInterface
-}
+export const queuePlaceholder:GetQueueInterface = {
+  description: '',
+  queueID: 0,
+  calls: {
+    averageHoldTime: 0,
+    callerCount: 0,
+    longestHoldTime: 0,
+    totalTalkTime: 0
+  },
+  members: [],
+  settings: {
+    ringTime: 0,
+    timeout: 0
+  }
+};
+
 
 export function get160FakeQueues(token: string, dependencies: []) {
 
   let list: GetQueueInterface[] = [];
 
-  for (let i = 0; i < 160; i++) {
+  for (let i = 0; i < 2; i++) {
 
     list.push(
       {
-        description: loremIpsum({ count: 2, units: 'word'}),
+        description: loremIpsum({ count: 2, units: 'word' }),
         members: getFakeQueueMembers('', 0, []),
         calls: {
           callerCount: 41,
@@ -70,7 +79,7 @@ export function getFakeQueueMembers(token: string, queueID: number, dependencies
 
   const statusName = ['RINGING', 'UNKNOWN', 'BUSY', 'AVAILABLE'];
 
-  for (let i = 0; i < 200; i++) {
+  for (let i = 0; i < 2000; i++) {
 
     list.push(
       {
@@ -93,11 +102,15 @@ export function getFakeQueueMembers(token: string, queueID: number, dependencies
 export function getQueues(token: string, dependencies: []) {
 
   let isLoading: boolean;
-  let fetchedData: GetQueuesInterface;
+  let fetchedData: GetQueueInterface[];
 
   [isLoading, fetchedData] = ManagerAPIGet(`/queues`, { headers: { 'X-Token': token } }, dependencies);
 
-  return [isLoading, fetchedData];
+  if (!isLoading && fetchedData !== null) {
+    return fetchedData;
+  } else {
+    return [];
+  }
 
 }
 
@@ -108,19 +121,26 @@ export function getQueue(token: string, queueID: number, dependencies: []) {
 
   [isLoading, fetchedData] = ManagerAPIGet(`/queue/${queueID}`, { headers: { 'X-Token': token } }, dependencies);
 
-  return [isLoading, fetchedData];
+  if (!isLoading && fetchedData !== null) {
+    return fetchedData;
+  } else {
+    return fetchedData;
+  }
 
 }
 
-export function getQueueMembers(token: string, queueID: number, dependencies: []) {
+export function getQueueMembers(token: string, queueID: number, dependencies: [any]) {
 
   let isLoading: boolean;
-  let fetchedData: GetQueueInterface;
+  let fetchedData: GetQueueMemberInterface[];
 
   [isLoading, fetchedData] = ManagerAPIGet(`/queue/${queueID}/members`, { headers: { 'X-Token': token } }, dependencies);
 
-  return [isLoading, fetchedData];
-
+  if (!isLoading && fetchedData !== null) {
+    return fetchedData;
+  } else {
+    return [];
+  }
 }
 
 export function getQueueMember(token: string, queueID: number, queueMember: string, dependencies: []) {

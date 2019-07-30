@@ -1,8 +1,8 @@
 import { AppSearchBar } from 'components/index';
 import { AutoSizer, List, ListRowProps } from 'react-virtualized';
 import Queue from './components/Queue/Queue';
-import React, { useEffect, useState } from 'react';
-import { get160FakeQueues, GetQueueInterface } from '../../../../hooks/managerAPI/queues';
+import React, { useEffect, useRef, useState } from 'react';
+import { GetQueueInterface, getQueues, queuePlaceholder } from '../../../../hooks/managerAPI/queues';
 import { InputBaseComponentProps } from '@material-ui/core/InputBase';
 
 interface QueueListInterface {
@@ -12,30 +12,44 @@ interface QueueListInterface {
 
 const QueueList = (props: QueueListInterface) => {
 
-  // const [, fetchedData] = getQueues('papa', []);
-  const fetchedData = get160FakeQueues('papa', []);
+  const fetchedData = getQueues('nboatevercall', []);
+  // const fetchedData = get160FakeQueues('papa', []);
   const [viewableQueues, setViewableQueues] = useState<GetQueueInterface[]>([]);
   const [filteredQueueList, setFilteredQueueList] = useState<GetQueueInterface[]>([]);
   const [searchWord, setSearchWord] = useState('');
+  const [localStorageCounter, setLocalStorageCounter] = useState(0);
 
-  // Viewable queues handler
-  useEffect(() => {
-    const queueList = localStorage.getItem('queueList');
-    if (queueList !== null) {
-      setViewableQueues(JSON.parse(queueList));
-      if (fetchedData.length > 0) {
-        if (JSON.parse(queueList).length < 1) {
-          localStorage.setItem('queueList', JSON.stringify(fetchedData));
+  const fetchedQueues = useRef([queuePlaceholder]);
+  fetchedQueues.current = fetchedData;
+
+  const viewableQueuesHandler = () => {
+    setLocalStorageCounter(0);
+    if(fetchedQueues.current.length !== undefined) {
+      fetchedQueues.current.map(queue => {
+        const queueList = localStorage.getItem(`queue${queue.queueID}List`);
+        setLocalStorageCounter(localStorageCounter + 1);
+        if (queueList !== null) {
           setViewableQueues(JSON.parse(queueList));
-        } else {
-          if (localStorage.getItem('queueList') !== JSON.stringify(fetchedData)) {
-            localStorage.setItem('queueList', JSON.stringify(fetchedData));
-            setViewableQueues(JSON.parse(queueList));
+          if (fetchedQueues.current.length > 0) {
+            if (JSON.parse(queueList).length < 1) {
+              localStorage.setItem(`queue${queue.queueID}List`, JSON.stringify(fetchedQueues.current));
+              setViewableQueues(JSON.parse(queueList));
+            } else {
+              if (localStorage.getItem(`queue${queue.queueID}List`) !== JSON.stringify(fetchedQueues.current)) {
+                localStorage.setItem(`queue${queue.queueID}List`, JSON.stringify(fetchedQueues.current));
+                setViewableQueues(JSON.parse(queueList));
+              }
+            }
           }
         }
-      }
+      });
     }
-  }, []); // [fetchedData]
+  };
+
+  useEffect(() => {
+    viewableQueuesHandler();
+  }, [fetchedData]); // Fetched data
+
 
   const getFilteredQueues = (searchWord: string, viewableQueues: [] | GetQueueInterface[]): [] | GetQueueInterface[] => {
     let list: GetQueueInterface[] = [];
@@ -63,8 +77,6 @@ const QueueList = (props: QueueListInterface) => {
     setSearchWord(props.target.value);
   };
 
-  const queueList = localStorage.getItem('queueList');
-
   // Alphabetic sorting on the first name
   const sortFirstName = (array: GetQueueInterface[]) => {
     return array.sort(function(a, b) {
@@ -89,7 +101,7 @@ const QueueList = (props: QueueListInterface) => {
     <React.Fragment>
       <AppSearchBar searchWord={searchWord} setSearchWord={setSearch} title={'Køer'}/>
       {
-        (queueList !== null) ? (JSON.parse(queueList).length < 1 ?
+        (localStorageCounter < 1 ?
             (<p>Loading</p>) : // Check if there is found any queueList in the local storage and decide if loading screen is showed..
             (<AutoSizer disableHeight={true}>
                 {({ width }) => (
@@ -114,7 +126,7 @@ const QueueList = (props: QueueListInterface) => {
                   />
                 )}</AutoSizer>
             )
-        ) : null
+        )
       }
     </React.Fragment>
   );
