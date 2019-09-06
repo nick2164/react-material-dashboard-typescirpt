@@ -1,4 +1,5 @@
-import { ManagerAPIGet } from './mangerAPI';
+import { ManagerAPIGetHook } from './mangerAPI';
+import { DependencyList } from 'react';
 
 export interface PhoneInterface {
   forwarding: PhoneForwarding,
@@ -29,23 +30,18 @@ export interface PhoneForwardingBusy {
   phoneNumber: string
 }
 
-export interface PhonesInterface {
-  [index: number]: PhoneInterface
-}
-
-interface GetPhonesInterface {
-  isLoading: boolean,
-  fetchedData: PhonesInterface
-}
-
-export function GetPhones(token: string, dependencies: []): GetPhonesInterface {
+export function GetPhones(token: string, dependencies: DependencyList) {
 
   let isLoading: boolean;
-  let fetchedData: PhonesInterface;
+  let fetchedData: PhoneInterface[];
 
-  [isLoading, fetchedData] = ManagerAPIGet(`/phones`, { headers: { 'X-Token': token } }, dependencies);
+  const request = ManagerAPIGetHook(`/phones`, { headers: { 'X-Token': token } }, dependencies);
 
-  return {isLoading, fetchedData};
+  if (!request.isLoading && request.fetchedData !== null) {
+    return request.fetchedData;
+  } else {
+    return [];
+  }
 
 }
 
@@ -54,13 +50,17 @@ interface GetPhoneInterface {
   fetchedData: PhoneInterface
 }
 
-export const GetPhone = (token: string, phoneID: string, dependencies: []): GetPhoneInterface => {
+export const GetPhone = (token: string, phoneID: string, dependencies: DependencyList) => {
 
-  let isLoading: boolean;
   let fetchedData: PhoneInterface;
 
-  [isLoading, fetchedData] = ManagerAPIGet(`/phone/${phoneID}`, { headers: { 'X-Token': token } }, dependencies);
+  const request = ManagerAPIGetHook(`/phone/${phoneID}`, { headers: { 'X-Token': token } }, dependencies);
 
-  return {isLoading,fetchedData};
+  if (!request.isLoading && request.fetchedData !== null) {
+    fetchedData = request.fetchedData;
+    return fetchedData;
+  } else {
+    return {};
+  }
 
 };

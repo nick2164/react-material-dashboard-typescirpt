@@ -40,6 +40,7 @@ const Dashboard: React.FC<Props> = ({ title, children }) => {
         title={title}
       />
       <Drawer
+
         anchor="left"
         classes={{ paper: classes.drawerPaper }}
         onClose={handleClose}

@@ -1,5 +1,6 @@
-import { ManagerAPIGet } from './mangerAPI';
+import { ManagerAPIGetHook } from './mangerAPI';
 import { loremIpsum } from 'lorem-ipsum';
+import { DependencyList } from 'react';
 
 export interface GetQueueInterface {
   description: string,
@@ -28,7 +29,7 @@ export interface GetQueueMemberInterface {
   phoneNumber: string
 }
 
-export const queuePlaceholder:GetQueueInterface = {
+export const queuePlaceholder: GetQueueInterface = {
   description: '',
   queueID: 0,
   calls: {
@@ -45,11 +46,11 @@ export const queuePlaceholder:GetQueueInterface = {
 };
 
 
-export function get160FakeQueues(token: string, dependencies: []) {
+export function get160FakeQueues(token: string, dependencies: DependencyList) {
 
   let list: GetQueueInterface[] = [];
 
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 200; i++) {
 
     list.push(
       {
@@ -73,7 +74,7 @@ export function get160FakeQueues(token: string, dependencies: []) {
 
 }
 
-export function getFakeQueueMembers(token: string, queueID: number, dependencies: []) {
+export function getFakeQueueMembers(token: string, queueID: number, dependencies: DependencyList) {
 
   let list: GetQueueMemberInterface[] = [];
 
@@ -99,14 +100,14 @@ export function getFakeQueueMembers(token: string, queueID: number, dependencies
 }
 
 
-export function getQueues(token: string, dependencies: []) {
+export function getQueues(token: string | null, dependencies: DependencyList) {
 
-  let isLoading: boolean;
   let fetchedData: GetQueueInterface[];
 
-  [isLoading, fetchedData] = ManagerAPIGet(`/queues`, { headers: { 'X-Token': token } }, dependencies);
+  const request = ManagerAPIGetHook(`/queues`, { headers: { 'X-Token': token } }, dependencies);
 
-  if (!isLoading && fetchedData !== null) {
+  if (!request.isLoading && request.fetchedData !== null) {
+    fetchedData = request.fetchedData;
     return fetchedData;
   } else {
     return [];
@@ -114,42 +115,47 @@ export function getQueues(token: string, dependencies: []) {
 
 }
 
-export function getQueue(token: string, queueID: number, dependencies: []) {
+export function getQueue(token: string, queueID: number, dependencies: DependencyList) {
 
-  let isLoading: boolean;
   let fetchedData: GetQueueInterface;
 
-  [isLoading, fetchedData] = ManagerAPIGet(`/queue/${queueID}`, { headers: { 'X-Token': token } }, dependencies);
+  const request = ManagerAPIGetHook(`/queue/${queueID}`, { headers: { 'X-Token': token } }, dependencies);
 
-  if (!isLoading && fetchedData !== null) {
+  if (!request.isLoading && request.fetchedData !== null) {
+    fetchedData = request.fetchedData;
     return fetchedData;
   } else {
-    return fetchedData;
+    return {};
   }
 
 }
 
-export function getQueueMembers(token: string, queueID: number, dependencies: [any]) {
+export function getQueueMembers(token: string | null, queueID: number, dependencies: DependencyList) {
 
-  let isLoading: boolean;
   let fetchedData: GetQueueMemberInterface[];
 
-  [isLoading, fetchedData] = ManagerAPIGet(`/queue/${queueID}/members`, { headers: { 'X-Token': token } }, dependencies);
+  const request = ManagerAPIGetHook(`/queue/${queueID}/members`, { headers: { 'X-Token': token } }, dependencies);
 
-  if (!isLoading && fetchedData !== null) {
+  if (!request.isLoading && request.fetchedData !== null) {
+    fetchedData = request.fetchedData;
     return fetchedData;
   } else {
     return [];
   }
+
 }
 
-export function getQueueMember(token: string, queueID: number, queueMember: string, dependencies: []) {
+export function getQueueMember(token: string, queueID: number, queueMember: string, dependencies: DependencyList) {
 
-  let isLoading: boolean;
   let fetchedData: GetQueueInterface;
 
-  [isLoading, fetchedData] = ManagerAPIGet(`/queue/${queueID}/member/${queueMember}`, { headers: { 'X-Token': token } }, dependencies);
+  const request = ManagerAPIGetHook(`/queue/${queueID}/member/${queueMember}`, { headers: { 'X-Token': token } }, dependencies);
 
-  return [isLoading, fetchedData];
+  if (!request.isLoading && request.fetchedData !== null) {
+    fetchedData = request.fetchedData;
+    return fetchedData;
+  } else {
+    return {};
+  }
 
 }

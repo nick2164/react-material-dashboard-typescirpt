@@ -31,13 +31,13 @@ const Sidebar: React.FC<Props> = ({ className }) => {
       <div className={classes.logoWrapper}>
         <Link className={classes.logoLink} to="/">
           <img
-            alt="evercall"
+            alt="evercall ApS"
             className={classes.logoImage}
-            src="/images/logos/evercall.svg"
+            src="/images/logos/evercall-logo 2013-ORIGINALLOGO - FLAT.svg"
           />
         </Link>
       </div>
-      <Divider className={classes.logoDivider}/>
+      <Divider className={classes.logoDivider} />
       <List component="div" disablePadding>
         <ListItem
           activeClassName={classes.activeListItem}
@@ -45,7 +45,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/contacts">
           <ListItemIcon className={classes.listItemIcon}>
-            <FontAwesomeIcon icon={faAddressBook}/>
+            <FontAwesomeIcon icon={faAddressBook} />
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
@@ -58,7 +58,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/groups">
           <ListItemIcon className={classes.listItemIcon}>
-            <FontAwesomeIcon icon={faUsers}/>
+            <FontAwesomeIcon icon={faUsers} />
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
@@ -71,7 +71,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/voicemails">
           <ListItemIcon className={classes.listItemIcon}>
-            <FontAwesomeIcon icon={faVoicemail}/>
+            <FontAwesomeIcon icon={faVoicemail} />
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
@@ -84,7 +84,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/queues">
           <ListItemIcon className={classes.listItemIcon}>
-            <FontAwesomeIcon icon={faUsers}/>
+            <FontAwesomeIcon icon={faUsers} />
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
@@ -97,7 +97,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/typography">
           <ListItemIcon className={classes.listItemIcon}>
-            <TextFieldsIcon/>
+            <TextFieldsIcon />
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
@@ -110,7 +110,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/icons">
           <ListItemIcon className={classes.listItemIcon}>
-            <ImageIcon/>
+            <ImageIcon />
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
@@ -123,7 +123,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/account">
           <ListItemIcon className={classes.listItemIcon}>
-            <AccountBoxIcon/>
+            <AccountBoxIcon />
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
@@ -136,7 +136,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           component={NavLink}
           to="/settings">
           <ListItemIcon className={classes.listItemIcon}>
-            <SettingsIcon/>
+            <SettingsIcon />
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}
@@ -144,7 +144,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           />
         </ListItem>
       </List>
-      <Divider className={classes.listDivider}/>
+      <Divider className={classes.listDivider} />
       <List
         component="div"
         disablePadding
@@ -159,7 +159,7 @@ const Sidebar: React.FC<Props> = ({ className }) => {
           href="https://devias.io/contact-us"
           target="_blank">
           <ListItemIcon className={classes.listItemIcon}>
-            <InfoIcon/>
+            <InfoIcon />
           </ListItemIcon>
           <ListItemText
             classes={{ primary: classes.listItemText }}

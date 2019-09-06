@@ -1,24 +1,14 @@
-import React, { Fragment, useContext, useEffect, useRef, useState } from 'react';
+import React, { Fragment, useContext } from 'react';
 // Externals
 import classNames from 'classnames';
 // Material helpers
 // Material components
-import { Badge, IconButton, Popover, Toolbar, Typography } from '@material-ui/core';
+import { IconButton, Toolbar, Typography } from '@material-ui/core';
 // Material icons
-import {
-  Close as CloseIcon,
-  Input as InputIcon,
-  Menu as MenuIcon,
-  NotificationsOutlined as NotificationsIcon
-} from '@material-ui/icons';
-// Shared services
-import { getNotifications } from 'services/notification';
-// Custom components
-import { NotificationList } from './components';
+import { Close as CloseIcon, Input as InputIcon, Menu as MenuIcon } from '@material-ui/icons';
 // Component styles
 import useStyles from './useStyles';
 import { __RouterContext } from 'react-router';
-import { Notif } from 'data/notifications';
 
 type Props = {
   title: string;
@@ -27,12 +17,6 @@ type Props = {
   onToggleSidebar: Function;
 };
 
-type State = {
-  notifications: Notif[];
-  notificationsLimit: number;
-  notificationsCount: number;
-  notificationsEl: any;
-};
 const Topbar: React.FC<Props> = ({
                                    className,
                                    title,
@@ -41,62 +25,11 @@ const Topbar: React.FC<Props> = ({
                                  }) => {
   const classes = useStyles();
   const rootClassName = classNames(classes.root, className);
-  const signalRef = useRef(true);
   const { history } = useContext(__RouterContext);
-  const [state, setState] = useState<State>({
-    notifications: [],
-    notificationsLimit: 4,
-    notificationsCount: 0,
-    notificationsEl: null
-  });
-  const showNotifications = Boolean(state.notificationsEl);
-
-  const _getNotifications = async () => {
-    try {
-      const { notificationsLimit } = state;
-
-      const { notifications, notificationsCount } = await getNotifications(
-        notificationsLimit
-      );
-
-      if (signalRef.current) {
-        setState(_state => ({
-          ..._state,
-          notifications,
-          notificationsCount
-        }));
-      }
-    } catch (error) {
-      return;
-    }
-  };
-
-  useEffect(() => {
-    signalRef.current = true;
-    _getNotifications();
-    return () => {
-      signalRef.current = false;
-    };
-  });
 
   const handleSignOut = () => {
-    localStorage.setItem('isAuthenticated', 'false');
+    localStorage.setItem('token', 'null');
     history.push('/sign-in');
-  };
-
-  const handleShowNotifications = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    setState(_state => ({
-      ..._state,
-      notificationsEl: event.currentTarget
-    }));
-  };
-  const handleCloseNotifications = () => {
-    setState(_state => ({
-      ..._state,
-      notificationsEl: null
-    }));
   };
 
   return (
@@ -113,38 +46,11 @@ const Topbar: React.FC<Props> = ({
           <Typography className={classes.title} variant="h4">
             {title}
           </Typography>
-          <IconButton
-            className={classes.notificationsButton}
-            onClick={handleShowNotifications}>
-            <Badge
-              badgeContent={state.notificationsCount}
-              color="primary"
-              variant="dot">
-              <NotificationsIcon/>
-            </Badge>
-          </IconButton>
           <IconButton className={classes.signOutButton} onClick={handleSignOut}>
             <InputIcon/>
           </IconButton>
         </Toolbar>
       </div>
-      <Popover
-        anchorEl={state.notificationsEl}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center'
-        }}
-        onClose={handleCloseNotifications}
-        open={showNotifications}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center'
-        }}>
-        <NotificationList
-          notifications={state.notifications}
-          onSelect={handleCloseNotifications}
-        />
-      </Popover>
     </Fragment>
   );
 };

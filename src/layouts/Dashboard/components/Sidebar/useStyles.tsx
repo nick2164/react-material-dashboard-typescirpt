@@ -21,7 +21,8 @@ export default makeStyles((theme: Theme) =>
       fontSize: 0
     },
     logoImage: {
-      cursor: 'pointer'
+      cursor: 'pointer',
+      height: 35
     },
     logoDivider: {
       marginBottom: theme.spacing(2)

@@ -1,5 +1,6 @@
-import { ManagerAPIGet, ManagerAPIPatch } from './mangerAPI';
+import { ManagerAPIGetHook, ManagerAPIPatchHook } from './mangerAPI';
 import { loremIpsum } from 'lorem-ipsum';
+import { DependencyList } from 'react';
 
 export interface GetUserGroupInterface {
   'userGroupDescription': string,
@@ -8,28 +9,32 @@ export interface GetUserGroupInterface {
   'users': number[],
 }
 
-export interface UserGroupsInterface {
-  [index: number]: GetUserGroupInterface
+export function getUserGroups(token: string, dependencies: DependencyList) {
+
+  let fetchedData: GetUserGroupInterface[];
+
+  const request = ManagerAPIGetHook(`/userGroups`, { headers: { 'X-Token': token } }, dependencies);
+
+  if (!request.isLoading && request.fetchedData !== null) {
+    fetchedData = request.fetchedData;
+    return fetchedData;
+  } else {
+    return [];
+  }
+
 }
 
-export function getUserGroups(token: string, dependencies: []) {
+export function getUserGroup(token: string, userGroupID: number, dependencies: DependencyList) {
 
-  let isLoading: boolean;
-  let fetchedData: UserGroupsInterface;
-
-  [isLoading, fetchedData] = ManagerAPIGet(`/userGroups`, { headers: { 'X-Token': token } }, dependencies);
-
-  return [isLoading, fetchedData];
-
-}
-
-export function getUserGroup(token: string, userGroupID: number, dependencies: []) {
-
-  let isLoading: boolean;
   let fetchedData: GetUserGroupInterface;
 
-  [isLoading, fetchedData] = ManagerAPIGet(`/userGroup/${userGroupID}`, { headers: { 'X-Token': token } }, dependencies);
+  const request = ManagerAPIGetHook(`/userGroup/${userGroupID}`, { headers: { 'X-Token': token } }, dependencies);
 
-  return [isLoading, fetchedData];
+  if (!request.isLoading && request.fetchedData !== null) {
+    fetchedData = request.fetchedData;
+    return fetchedData;
+  } else {
+    return {};
+  }
 
 }
